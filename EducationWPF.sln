@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationWPF", "EducationWPF\EducationWPF.csproj", "{7D429E6E-4008-422E-B4AB-C8349866E8B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationWPF", "EducationWPF\EducationWPF.csproj", "{7D429E6E-4008-422E-B4AB-C8349866E8B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6CD85F88-B3CB-48A3-9E45-21C7DBF90CD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWPF_Console", "Tests\EWPF_Console\EWPF_Console.csproj", "{3E285471-CCFE-41EA-BA73-FAC368CE2C99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{7D429E6E-4008-422E-B4AB-C8349866E8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D429E6E-4008-422E-B4AB-C8349866E8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D429E6E-4008-422E-B4AB-C8349866E8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3E285471-CCFE-41EA-BA73-FAC368CE2C99} = {6CD85F88-B3CB-48A3-9E45-21C7DBF90CD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E528A0D-66CE-49E8-B12A-F35BDA0CC5BD}
