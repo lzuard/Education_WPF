@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6CD85F88
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWPF_Console", "Tests\EWPF_Console\EWPF_Console.csproj", "{3E285471-CCFE-41EA-BA73-FAC368CE2C99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWPF_TestProject", "Tests\EWPF_TestProject\EWPF_TestProject.csproj", "{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E285471-CCFE-41EA-BA73-FAC368CE2C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3E285471-CCFE-41EA-BA73-FAC368CE2C99} = {6CD85F88-B3CB-48A3-9E45-21C7DBF90CD0}
+		{8A97A8FC-C66A-4D08-AC5B-2E6210A4F2EE} = {6CD85F88-B3CB-48A3-9E45-21C7DBF90CD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E528A0D-66CE-49E8-B12A-F35BDA0CC5BD}
