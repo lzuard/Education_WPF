@@ -9,8 +9,8 @@ namespace EducationWPF.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
-        #region Window title
-        private string _Title="Some title";
+        #region Window title : string
+        private string _Title="Заголовок окна";
 
         /// <summary>Window title</summary>
         public string Title
@@ -26,6 +26,19 @@ namespace EducationWPF.ViewModels
 
         }
         #endregion
+
+        #region Status : string
+        private string _Status = "Готов!";
+
+        /// <summary>Status of the window</summary>
+        public string Status
+        {
+            get => _Status;
+            set => Set(ref _Status, value);
+
+        }
+        #endregion
+
 
     }
 }
