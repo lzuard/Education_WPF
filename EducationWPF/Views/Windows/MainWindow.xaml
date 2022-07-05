@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:EducationWPF.ViewModels"
+        xmlns:cmd="clr-namespace:EducationWPF.Infrastructure.Commands"
         xmlns:local="clr-namespace:EducationWPF"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="800">
@@ -13,7 +14,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"></MenuItem>
+                <!--><MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>-->
+                <MenuItem Header="Выход">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Помощи"></MenuItem>
