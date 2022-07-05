@@ -1,5 +1,5 @@
 ﻿using EducationWPF.Infrastructure.Commands.Base;
-using System;A
+using System;
 
 namespace EducationWPF.Infrastructure.Commands
 {
