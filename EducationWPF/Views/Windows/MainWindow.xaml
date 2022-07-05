@@ -8,18 +8,24 @@
         xmlns:local="clr-namespace:EducationWPF"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+    </Window.InputBindings>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <!--><MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>-->
-                <MenuItem Header="Выход">
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход">
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
-                </MenuItem>
+                </MenuItem>-->
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Помощи"></MenuItem>
@@ -51,7 +57,11 @@
                     <Ellipse Grid.Column="1" Grid.Row="0"
                              Fill="Red"
                              Stroke="Blue"
-                             StrokeThickness="3"/>
+                             StrokeThickness="3">
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}" MouseAction="LeftDoubleClick"/>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
                     <GridSplitter Grid.Column="0" Grid.RowSpan="2"
                                   HorizontalAlignment="Right"
                                   Width="4"/>
