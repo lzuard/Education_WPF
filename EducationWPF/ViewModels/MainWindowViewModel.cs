@@ -1,4 +1,5 @@
 ﻿using EducationWPF.Infrastructure.Commands;
+using EducationWPF.Models;
 using EducationWPF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,16 @@ namespace EducationWPF.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
+        #region TestDataPoints: IEnumerable
+        private IEnumerable<DataPoint> _TestDataPoints;
+
+        public IEnumerable<DataPoint> TestDataPoints
+        {
+            get => _TestDataPoints;
+            set => Set(ref _TestDataPoints, value);
+        }
+        #endregion
+
         #region Window title : string
         private string _Title="Заголовок окна";
 
@@ -61,6 +72,15 @@ namespace EducationWPF.ViewModels
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             #endregion
+
+            var data_points=new List<DataPoint>((int)(360/0.1));
+            for (var x=0d; x <= 360; x += 0.1)
+            {
+                const double to_rad = Math.PI / 180;
+                var y=Math.Sin(x*to_rad);
+                data_points.Add(new DataPoint { XValue= x, YValue = y });
+            }
+            TestDataPoints = data_points;
         }
     }
 }
