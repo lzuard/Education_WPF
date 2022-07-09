@@ -18,6 +18,18 @@ namespace EducationWPF.ViewModels
         /*----------------------------------------------------------------------------------*/
         public ObservableCollection<Group> Groups { get; }
 
+        #region SelectedGroup:Group
+
+        private Group _SelectedGroup;
+
+        public Group SelectedGroup
+        {
+            get => _SelectedGroup;
+            set => Set(ref _SelectedGroup, value);
+        }
+
+        #endregion
+
         #region SelectedPageIndex:int
 
         private int _SelectedPageIndex = 0;
