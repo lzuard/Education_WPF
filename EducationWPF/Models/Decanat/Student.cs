@@ -14,5 +14,7 @@ namespace EducationWPF.Models.Decanat
         public DateTime Birthday    { get; set; }
         public double Rating    { get; set; }
 
+        public string Description { get; set; }
+
     }
 }
