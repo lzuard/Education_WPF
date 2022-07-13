@@ -18,6 +18,20 @@ namespace EducationWPF.ViewModels
         /*----------------------------------------------------------------------------------*/
         public ObservableCollection<Group> Groups { get; }
 
+        public object[] CompositeCollection { get; }
+
+        #region SelectedCompositeValue:Object
+
+        private object _SelectedCompositeValue;
+
+        public object SelectedCompositeValue
+        {
+            get => _SelectedCompositeValue;
+            set => Set(ref _SelectedCompositeValue, value);
+        }
+
+        #endregion
+
         #region SelectedGroup:Group
 
         private Group _SelectedGroup;
@@ -145,6 +159,14 @@ namespace EducationWPF.ViewModels
 
             });
             Groups = new ObservableCollection<Group>(groups);
+
+            var data_list = new List<object>();
+            data_list.Add("Hey hey hey");
+            data_list.Add(42);
+            var group = Groups[1];
+            data_list.Add(group);
+            data_list.Add(group.Students[0]);
+            CompositeCollection = data_list.ToArray();
 
         }
 
