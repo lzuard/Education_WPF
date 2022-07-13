@@ -134,14 +134,14 @@
                        <DockPanel>
                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
                                <UniformGrid.Resources>
-                                   <Style x:Key="ButtonStyle" TargetType="Button">
+                                   <Style TargetType="Button">
                                        <Setter Property="Margin" Value="3,0"/>
                                        <Setter Property="Padding" Value="3,5"/>
                                        <Setter Property="Background" Value="White"/>
                                    </Style>
                                </UniformGrid.Resources>
-                               <Button Content="Добавить" Margin="3,0" Style="{StaticResource ButtonStyle}" Command="{Binding CreateNewGroupCommand}"/>
-                                <Button Content="Удалить" Margin="3,0" Style="{StaticResource ButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                               <Button Content="Добавить" Margin="3,0" Style="{StaticResource PrimaryBtn}"  Command="{Binding CreateNewGroupCommand}"/>
+                                <Button Content="Удалить" Margin="3,0" Style="{StaticResource DangerBtn}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                            </UniformGrid>
                            <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0" 
                                     SelectedItem="{Binding SelectedGroup}">
