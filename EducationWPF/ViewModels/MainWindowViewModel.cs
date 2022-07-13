@@ -122,6 +122,37 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region Create New Group Command
+        public ICommand CreateNewGroupCommand { get; }
+
+        private bool CanCreateNewGroupExecute(object p) => true;
+
+        private void OnCreateNewGroupExecuted(object p)
+        {
+            var group_max_index = Groups.Count + 1;
+            var new_group = new Group
+            {
+                Name = $"Группа {group_max_index}",
+                Students = new ObservableCollection<Student>()
+            };
+            Groups.Add(new_group);
+        } 
+        #endregion
+
+        #region Delete Group Command
+        public ICommand DeleteGroupCommand { get; }
+        private bool CanDeleteGroupExecute(object p) => p is Group group && Groups.Contains(group);
+
+        private void OnDeleteGroupExecuted(object p)
+        {
+            if (!(p is Group group)) return;
+            var group_index= Groups.IndexOf(group);
+            Groups.Remove(group);
+            if (group_index < Groups.Count)
+                SelectedGroup = Groups[group_index];
+        } 
+        #endregion
+
         #endregion
 
         /*----------------------------------------------------------------------------------*/
@@ -131,6 +162,8 @@ namespace EducationWPF.ViewModels
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+            CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupExecuted, CanCreateNewGroupExecute);
+            DeleteGroupCommand = new LambdaCommand(OnDeleteGroupExecuted, CanDeleteGroupExecute);
             #endregion
 
             var data_points=new List<DataPoint>((int)(360/0.1));
