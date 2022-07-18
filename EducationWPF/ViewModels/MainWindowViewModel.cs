@@ -3,10 +3,8 @@ using EducationWPF.Models;
 using EducationWPF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Input;
-using OxyPlot.Wpf;
 
 namespace EducationWPF.ViewModels
 {
