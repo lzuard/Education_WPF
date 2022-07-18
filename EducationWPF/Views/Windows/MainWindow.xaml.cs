@@ -9,7 +9,7 @@ namespace EducationWPF
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); jhfgjhg
         }
     }
 }
