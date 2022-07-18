@@ -113,10 +113,18 @@
                            </DockPanel>
                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
                                <Button Content="Добавить" Padding="0,7" Style="{StaticResource CheckButtonStyle}"  Command="{Binding CreateNewGroupCommand}"/>
-                                <Button Content="Удалить" Padding="0,7" Style="{StaticResource RemoveButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                               <Button Content="Удалить" Padding="0,7" Style="{StaticResource RemoveButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
                            </UniformGrid>
-                           <ListBox ItemsSource="{Binding Source={StaticResource GroupsCollection}}" SelectedIndex="0" 
+                           <ListBox ItemsSource="{Binding Source={StaticResource GroupsCollection}}" 
+                                    SelectedIndex="0" 
                                     SelectedItem="{Binding SelectedGroup}">
+                               <ListBox.ItemsPanel>
+                                   <ItemsPanelTemplate>
+                                       <VirtualizingStackPanel IsVirtualizing="True"
+                                                               IsContainerVirtualizable="True"
+                                                               VirtualizationMode="Recycling"/>
+                                   </ItemsPanelTemplate>
+                               </ListBox.ItemsPanel>
                                <ListBox.ItemTemplate>
                                    <DataTemplate DataType="decanat:Group">
                                        <StackPanel Orientation="Horizontal">
