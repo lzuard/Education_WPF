@@ -37,5 +37,6 @@ namespace EducationWPF
             var collection = (CollectionViewSource) text_box.FindResource("GroupsCollection");
             collection.View.Refresh();
         }
+
     }
 }
