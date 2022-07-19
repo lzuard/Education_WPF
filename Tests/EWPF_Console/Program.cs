@@ -29,7 +29,7 @@ namespace EWPF_Console // Note: actual namespace depends on the project name.
             }
         }
 
-        private static DateTime[] GetDatas() => GetDataLines()
+        private static DateTime[] GetDates() => GetDataLines()
             .First()
             .Split(',')
             .Skip(4)
@@ -57,13 +57,13 @@ namespace EWPF_Console // Note: actual namespace depends on the project name.
             //foreach (var data_line in GetDataLines())
             //    Console.WriteLine(data_line);
 
-            //var dates = GetDatas();
+            //var dates = GetDates();
             
             //Console.WriteLine(String.Join("\r\n", dates));
 
             var russia_data = GetData()
                 .First(v=>v.Country.Equals("Russia",StringComparison.OrdinalIgnoreCase));
-            Console.WriteLine(string.Join("\r\n", GetDatas().Zip(russia_data.Counts, (date, count) => $"{date:dd:MM} - {count}")));
+            Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts, (date, count) => $"{date:dd:MM} - {count}")));
             Console.ReadLine();
         }
     }
