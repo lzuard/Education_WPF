@@ -158,6 +158,20 @@ namespace EducationWPF.ViewModels
         //    });
 
 
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region SelectedDirectory : DirectoryViewModel
+
+        private DirectoryViewModel _SelectedDirectory;
+
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _SelectedDirectory;
+            set=> Set(ref _SelectedDirectory, value);
+        }
+
+        #endregion
+
         /*----------------------------------------------------------------------------------*/
 
         #region Commands
