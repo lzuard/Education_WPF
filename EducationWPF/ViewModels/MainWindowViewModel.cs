@@ -17,6 +17,10 @@ namespace EducationWPF.ViewModels
     internal class MainWindowViewModel: ViewModel
     {
         /*----------------------------------------------------------------------------------*/
+        private readonly CountiesStatisticViewModel _CountiesStatistic;
+
+
+        /*----------------------------------------------------------------------------------*/
 
 
 
@@ -151,6 +155,8 @@ namespace EducationWPF.ViewModels
 
         public MainWindowViewModel()
         {
+            _CountiesStatistic = new CountiesStatisticViewModel(this);
+
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
