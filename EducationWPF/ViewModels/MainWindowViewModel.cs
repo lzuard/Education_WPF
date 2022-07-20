@@ -17,7 +17,7 @@ namespace EducationWPF.ViewModels
     internal class MainWindowViewModel: ViewModel
     {
         /*----------------------------------------------------------------------------------*/
-        private readonly CountiesStatisticViewModel _CountiesStatistic;
+        public CountriesStatisticViewModel CountriesStatistic { get; }
 
 
         /*----------------------------------------------------------------------------------*/
@@ -155,7 +155,7 @@ namespace EducationWPF.ViewModels
 
         public MainWindowViewModel()
         {
-            _CountiesStatistic = new CountiesStatisticViewModel(this);
+            CountriesStatistic = new CountriesStatisticViewModel(this);
 
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);

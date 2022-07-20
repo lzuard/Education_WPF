@@ -59,9 +59,7 @@
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
             <TabItem Header="Статистика">
-                <view:CountiesStatisticView>
-
-                </view:CountiesStatisticView>
+                <view:CountiesStatisticView DataContext="{Binding CountriesStatistic}"/>
             </TabItem>
             <TabItem Header="График">
                 <oxy:Plot>
