@@ -6,6 +6,7 @@
              xmlns:l="clr-namespace:EducationWPF"
              xmlns:vm="clr-namespace:EducationWPF.ViewModels"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
+             xmlns:m="clr-namespace:EducationWPF.Models"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -22,7 +23,17 @@
                         <TextBlock Text="Загрузить данные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}"/>
+                <ListBox ItemsSource="{Binding Countries}" 
+                         SelectedItem="{Binding SelectedCountry}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="m:CountryInfo">
+                            <TextBlock>
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBox Text="{Binding Location}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </DockPanel>
         </GroupBox>
 

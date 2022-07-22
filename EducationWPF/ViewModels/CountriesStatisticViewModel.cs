@@ -15,7 +15,7 @@ namespace EducationWPF.ViewModels
 {
     internal class CountriesStatisticViewModel : ViewModel
     {
-        private DataService _DataService;
+        private readonly DataService _DataService;
 
         private MainWindowViewModel MainModel { get; }
 
@@ -28,6 +28,18 @@ namespace EducationWPF.ViewModels
         {
             get => _Countries;
             private set => Set(ref _Countries, value);
+        }
+
+        #endregion
+
+        #region SelectedCountry: CountryInfo
+
+        private CountryInfo _SelectedCountry;
+
+        public CountryInfo SelectedCountry
+        {
+            get => _SelectedCountry;
+            set => Set(ref _SelectedCountry, value);
         }
 
         #endregion
