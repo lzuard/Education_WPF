@@ -3,7 +3,7 @@
                     xmlns:fa="http://schemas.fontawesome.com/icons/">
 
     <Style x:Key="BtnBase" TargetType="ButtonBase">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
     </Style>
 
     <Style TargetType="Button" BasedOn="{StaticResource BtnBase}"/>
@@ -13,8 +13,8 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
     <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-        <Setter Property="Background" Value="Red"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource RedBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
     </Style>
 
     <Style x:Key="FocusVisual">
@@ -66,8 +66,8 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>-->
                 <!--<Setter Property="Background" TargetName="border" Value="Blue"/>-->
-                <Setter Property="BorderBrush" TargetName="border" Value="White"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource WhiteBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter Property="Background" TargetName="border" Value="DarkBlue"/>
@@ -83,7 +83,7 @@
 
     <Style x:Key="CustomButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
