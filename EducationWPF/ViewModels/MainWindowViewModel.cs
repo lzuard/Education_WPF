@@ -8,12 +8,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using EducationWPF.Models.Decanat;
 using OxyPlot;
 using DataPoint = EducationWPF.Models.DataPoint;
 
 namespace EducationWPF.ViewModels
 {
+    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel: ViewModel
     {
         /*----------------------------------------------------------------------------------*/
@@ -133,7 +135,8 @@ namespace EducationWPF.ViewModels
         private bool CanCloseApplicationCommandExecute(object p) => true;
         private void OnCloseApplicationCommandExecuted(object p) 
         {
-            Application.Current.Shutdown();
+            (RootObject as Window)?.Close();
+            //Application.Current.Shutdown();
         }
         #endregion
 

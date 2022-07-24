@@ -13,16 +13,17 @@
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:view="clr-namespace:EducationWPF.Views"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="450" Width="800">
+        Title="{Binding Path=Title}" Height="450" Width="800"
+        DataContext="{vm:MainWindowViewModel}">
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
