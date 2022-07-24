@@ -49,7 +49,15 @@
                 <Grid.Resources>
                     <sys:Double x:Key="Value3">3</sys:Double>
                     <c:Ratio k="2" x:Key="Ratio2"></c:Ratio>
-                    <c:Linear K="5" B="{StaticResource Value3}" x:Key="LinearK5B3"></c:Linear>
+                    <c:Linear K="5" B="{StaticResource Value3}" x:Key="LinearK5B3"/>
+                    <c:CompositeConverter x:Key="TestConverter">
+                        <c:CompositeConverter.First>
+                            <c:Linear K="5"/>
+                        </c:CompositeConverter.First>
+                        <c:CompositeConverter.Second>
+                            <c:Linear K="-3" B="10"/>
+                        </c:CompositeConverter.Second>
+                    </c:CompositeConverter>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -59,7 +67,7 @@
                 <Slider Grid.Row="0" Name="ValueSlider" Maximum="100" ToolTip="{Binding Value, RelativeSource={RelativeSource Self}}"/>
                 <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"
                     Grid.Row="0" Margin="0,30,0,0"
-                    Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource LinearK5B3}, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource TestConverter}, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
     </Grid>

@@ -4,8 +4,8 @@
 
 
 
-    <SolidColorBrush x:Key="WhiteBrush" Color="White" p:Freeze="true"/>
-    <SolidColorBrush x:Key="RedBrush" Color="Red" p:Freeze="true"/>
-    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" p:Freeze="true"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="White"/>
+    <SolidColorBrush x:Key="RedBrush" Color="Red"/>
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
 
 </ResourceDictionary>
