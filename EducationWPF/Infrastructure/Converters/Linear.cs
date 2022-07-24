@@ -10,6 +10,7 @@ namespace EducationWPF.Infrastructure.Converters
     /// f(x)=K*x+B
     /// </summary>
     [ValueConversion(typeof(double), typeof(double))]
+    [MarkupExtensionReturnType(typeof(Linear))]
     internal class Linear : Converter
     {
         [ConstructorArgument("K")]

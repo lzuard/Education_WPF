@@ -2,16 +2,29 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace EducationWPF.Infrastructure.Converters
 {
+    [MarkupExtensionReturnType(typeof(CompositeConverter))]
     internal class CompositeConverter : Converter
     {
+        [ConstructorArgument("First")]
         public IValueConverter First { get; set; }
+
+        [ConstructorArgument("Second")]
         public IValueConverter Second { get; set; }
+
+
+        public CompositeConverter(){}
+
+        public CompositeConverter(IValueConverter First) => this.First = First;
+
+        public CompositeConverter(IValueConverter First, IValueConverter Second) : this(First) => this.Second = Second;
 
 
         public override object Convert(object v, Type t, object p, CultureInfo c)
