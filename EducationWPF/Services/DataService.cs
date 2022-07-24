@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using EducationWPF.Models;
@@ -25,14 +26,23 @@ namespace EducationWPF.Services
 
         private static IEnumerable<string> GetDataLines()
         {
-            using var data_stream = GetDataStream().Result;
+            using var data_stream = (SynchronizationContext.Current is null ? GetDataStream() : Task.Run(GetDataStream)).Result;
             using var data_reader = new StreamReader(data_stream);
 
             while (!data_reader.EndOfStream)
             {
                 var line = data_reader.ReadLine();
                 if (string.IsNullOrWhiteSpace(line)) continue;
-                yield return line.Replace("Korea,", "Korea -").Replace("Bonaire,", "Bonaire -");
+                if(line.Contains('\"'))
+                {
+                    int firstEnter = line.IndexOf('\"');
+                    int lastEnter = line.LastIndexOf('\"');
+                    line = line.Substring(0, firstEnter)
+                           + line.Substring(firstEnter, lastEnter).Replace(',', '-')
+                           + line.Substring(lastEnter);
+                }
+
+                yield return line;
             }
         }
 
@@ -53,8 +63,8 @@ namespace EducationWPF.Services
             {
                 var province = row[0].Trim() ?? String.Empty;
                 var country_name = row[1].Trim(' ', '"') ?? String.Empty;
-                var latitude = double.Parse(row[2]);
-                var longitude = double.Parse(row[3]);
+                var latitude = String.IsNullOrEmpty(row[2]) ? 0 : double.Parse(row[2], CultureInfo.InvariantCulture);
+                var longitude = String.IsNullOrEmpty(row[2]) ? 0 : double.Parse(row[3], CultureInfo.InvariantCulture);
                 var counts = row.Skip(4).Select(int.Parse).ToArray();
 
                 
@@ -74,7 +84,7 @@ namespace EducationWPF.Services
                 var country = new CountryInfo()
                 {
                     Name = country_info.Key,
-                    ProvinceCounts = country_info.Select(c => new PlaceInfo()
+                    Provinces = country_info.Select(c => new PlaceInfo()
                     {
                         Name = c.Province,
                         Location = new Point(c.Place.Lat, c.Place.lon),

@@ -61,10 +61,13 @@ namespace EWPF_Console // Note: actual namespace depends on the project name.
             
             //Console.WriteLine(String.Join("\r\n", dates));
 
-            var russia_data = GetData()
-                .First(v=>v.Country.Equals("Russia",StringComparison.OrdinalIgnoreCase));
-            Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts, (date, count) => $"{date:dd:MM} - {count}")));
-            Console.ReadLine();
+            //var russia_data = GetData()
+            //    .First(v=>v.Country.Equals("Russia",StringComparison.OrdinalIgnoreCase));
+            //Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts, (date, count) => $"{date:dd:MM} - {count}")));
+            //Console.ReadLine();
+
+            double x = Double.Parse("31.22", CultureInfo.InvariantCulture);
+            Console.WriteLine(x);
         }
     }
 }

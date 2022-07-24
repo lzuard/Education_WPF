@@ -11,17 +11,19 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:view="clr-namespace:EducationWPF.Views"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="450" Width="800">
+        Title="{Binding Path=Title}" Height="450" Width="800"
+        DataContext="{vm:MainWindowViewModel}">
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -57,7 +59,22 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
-            <TabItem Header="Студенты">
+            <TabItem Header="Статистика">
+                <view:CountiesStatisticView DataContext="{Binding CountriesStatistic}"/>
+            </TabItem>
+            <TabItem Header="График">
+                <oxy:Plot>
+                    <oxy:Plot.Axes>
+                        <oxy:LinearAxis Position="Left"/>
+                        <oxy:LinearAxis Position="Bottom"/>
+                    </oxy:Plot.Axes>
+                    <oxy:LineSeries Color="Red"
+                                    ItemsSource="{Binding TestDataPoints}"
+                                    DataFieldX="XValue"
+                                    DataFieldY="YValue"/>
+                </oxy:Plot>
+            </TabItem>
+            <TabItem Header="Студенты" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--<ColumnDefinition Width="3*"/>
@@ -160,46 +177,6 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Файловая система">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Директории">
-                        <GroupBox.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
-                                                      ItemsSource="{Binding DirectoryItems}">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:ImageAwesome Height="12" Icon="Regular_Folder" Foreground="Peru" Margin="0,0,3,0"></fa:ImageAwesome>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </HierarchicalDataTemplate>
-                            <DataTemplate DataType="{x:Type vm:FileViewModel}">
-                                <StackPanel Orientation="Horizontal" ToolTip="{Binding CreationTime}">
-                                    <fa:ImageAwesome Height="12" Icon="Regular_File" Foreground="Blue"/>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GroupBox.Resources>
-                        <!--<ListBox ItemsSource="{Binding DiskRootDir.DirectoryItems}"
-                                 SelectedItem="{Binding SelectedDirectory}"
-                                 SelectedIndex="0">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="vm:DirectoryViewModel">
-                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding CreationTime}"></TextBlock>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>-->
-                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}"/>
-                        
-                    </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Файлы">
-                        <ListBox ItemsSource="{Binding SelectedDirectory.Files, Mode=OneWay}"
-                                 DisplayMemberPath="Name"></ListBox>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
             <TabItem Header="Тестирование виртуализации " Visibility="Collapsed">
                 <Grid>
                     <TextBlock Text="{Binding Source={x:Static local:App.IsDesignMode}}"/>
@@ -269,18 +246,6 @@
                         <ContentControl Content="{Binding SelectedCompositeValue}"/>
                     </GroupBox>
                 </Grid>
-            </TabItem>
-            <TabItem Header="График" Visibility="Collapsed">
-                <oxy:Plot>
-                    <oxy:Plot.Axes>
-                        <oxy:LinearAxis Position="Left"/>
-                        <oxy:LinearAxis Position="Bottom"/>
-                    </oxy:Plot.Axes>
-                    <oxy:LineSeries Color="Red"
-                                    ItemsSource="{Binding TestDataPoints}"
-                                    DataFieldX="XValue"
-                                    DataFieldY="YValue"/>
-                </oxy:Plot>
             </TabItem>
             <TabItem Header="Вкладка 2" Visibility="Collapsed">
                 <Button  VerticalAlignment="Top" HorizontalAlignment="Left"
