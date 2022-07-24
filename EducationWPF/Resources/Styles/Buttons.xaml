@@ -3,7 +3,7 @@
                     xmlns:fa="http://schemas.fontawesome.com/icons/">
 
     <Style x:Key="BtnBase" TargetType="ButtonBase">
-        <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="Background" Value="White"/>
     </Style>
 
     <Style TargetType="Button" BasedOn="{StaticResource BtnBase}"/>
@@ -66,7 +66,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>-->
                 <!--<Setter Property="Background" TargetName="border" Value="Blue"/>-->
-                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource WhiteBrush}"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="White"/>
                 <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
