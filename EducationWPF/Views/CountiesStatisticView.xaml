@@ -11,6 +11,7 @@
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:common="clr-namespace:EducationWPF.Infrastructure.Common"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -75,6 +76,13 @@
                     <oxy:LineSeries StrokeThickness="2" Color="Red" ItemsSource="{Binding SelectedCountry.Counts}"
                                     DataFieldX="Date" DataFieldY="Count"/>
                 </oxy:Plot>
+                <map:Map Grid.Row="1" ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={c:PointToMapLocation}}">
+                    <map:MapScale Margin="4" Opacity="0.5" Background="Transparent"/>
+                    <map:MapGraticule Opacity="0.3" Background="Transparent"/>
+                    <map:Map.MapLayer>
+                        <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>
+                    </map:Map.MapLayer>
+                </map:Map>
             </Grid>
         </GroupBox>
     </Grid>
