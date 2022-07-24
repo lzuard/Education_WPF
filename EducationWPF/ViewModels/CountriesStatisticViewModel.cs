@@ -69,7 +69,7 @@ namespace EducationWPF.ViewModels
             _Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
             {
                 Name = $"Country {1}",
-                ProvinceCounts = Enumerable.Range(1, 10).Select(j => new PlaceInfo
+                Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
                 {
                     Name = $"Province {i}",
                     Location = new Point(i, j),
