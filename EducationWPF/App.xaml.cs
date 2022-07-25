@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using System.Windows;
 using EducationWPF.Services;
+using EducationWPF.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace EducationWPF
 {
@@ -15,6 +18,12 @@ namespace EducationWPF
         {
             IsDesignMode = false;
             base.OnStartup(e);
+        }
+
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
+        {
+            services.AddSingleton<DataService>();
+            services.AddSingleton<CountriesStatisticViewModel>();
         }
     }
 }
