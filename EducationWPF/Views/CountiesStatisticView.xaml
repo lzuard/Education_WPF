@@ -80,7 +80,7 @@
                     <map:MapScale Margin="4" Opacity="0.5" Background="Transparent"/>
                     <map:MapGraticule Opacity="0.3" Background="Transparent"/>
                     <map:Map.MapLayer>
-                        <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>
+                        <map:MapTileLayer TileSource="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"/>
                     </map:Map.MapLayer>
                 </map:Map>
             </Grid>
