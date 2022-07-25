@@ -62,7 +62,7 @@
             <TabItem Header="Статистика">
                 <view:CountiesStatisticView DataContext="{Binding CountriesStatistic}"/>
             </TabItem>
-            <TabItem Header="График">
+            <!--<TabItem Header="График">
                 <oxy:Plot>
                     <oxy:Plot.Axes>
                         <oxy:LinearAxis Position="Left"/>
@@ -77,8 +77,8 @@
             <TabItem Header="Студенты" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <!--<ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="7*"/>-->
+                        --><!--<ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>--><!--
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -91,9 +91,9 @@
                                     <CollectionViewSource.SortDescriptions>
                                         <cm:SortDescription PropertyName="Name" Direction="Descending"/>
                                     </CollectionViewSource.SortDescriptions>
-                                    <!--<CollectionViewSource.GroupDescriptions>
+                                    --><!--<CollectionViewSource.GroupDescriptions>
                                         <PropertyGroupDescription PropertyName="Students.Count"/>
-                                    </CollectionViewSource.GroupDescriptions>-->
+                                    </CollectionViewSource.GroupDescriptions>--><!--
                                 </CollectionViewSource>
                             </DockPanel.Resources>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3">
@@ -142,16 +142,16 @@
                                       GridLinesVisibility="Vertical"
                                       VerticalGridLinesBrush="DarkGray"
                                       AlternatingRowBackground="LightGray">
-                                <!--HorizontalGridLinesBrush="Transparent"-->
+                                --><!--HorizontalGridLinesBrush="Transparent"-->
                                 <!--<DataGrid.GroupStyle>
                                     <GroupStyle/>
-                                </DataGrid.GroupStyle>-->
+                                </DataGrid.GroupStyle>--><!--
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                                     <DataGridTextColumn Header="Имя" Binding="{Binding Name}" />
                                     <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
                                     <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" />
-                                    <!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday ,StringFormat=dd:MM:yyyy}"/>-->
+                                    --><!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday ,StringFormat=dd:MM:yyyy}"/>--><!--
                                     <DataGridTemplateColumn Header="Дата рождения" >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate DataType="decanat:Student">
@@ -163,14 +163,14 @@
                                                 <DatePicker SelectedDate="{Binding Birthday}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellEditingTemplate>
-                                        <!--<DataGridTemplateColumn.CellTemplate>
+                                        --><!--<DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="decanat:Student">
                                             <DatePicker SelectedDate="{Binding Birthday}"/>
                                         </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>-->
+                                    </DataGridTemplateColumn.CellTemplate>--><!--
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn Header="Заметки" Binding="{Binding Description}" Width="*"/>
-                                    <!--<DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"></DataGridTextColumn>-->
+                                    --><!--<DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"></DataGridTextColumn>--><!--
                                 </DataGrid.Columns>
                             </DataGrid>
                         </DockPanel>
@@ -182,13 +182,13 @@
                     <TextBlock Text="{Binding Source={x:Static local:App.IsDesignMode}}"/>
                     <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
                              ItemsSource="{Binding TestStudents}">
-                        <!--<ListBox.ItemsPanel>
+                        --><!--<ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel IsVirtualizing="True"
                                                         VirtualizationMode="Recycling"
                                                         IsContainerVirtualizable="True"/>
                             </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>-->
+                        </ListBox.ItemsPanel>--><!--
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -295,7 +295,7 @@
                         </EventTrigger>
                     </Button.Triggers>
                 </Button>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </DockPanel>
 </Window>
