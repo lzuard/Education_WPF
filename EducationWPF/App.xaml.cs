@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using EducationWPF.Services;
 using EducationWPF.ViewModels;
@@ -18,6 +20,10 @@ namespace EducationWPF
         private static IHost _host;
 
         public static IHost Host => _host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
+
+        public static string CurrentDirectory => IsDesignMode ? Path.GetDirectoryName(GetSourceCodePath()) : Environment.CurrentDirectory;
+
+        private static string GetSourceCodePath([CallerFilePath] string path = null) => path;
 
         protected override async void OnStartup(StartupEventArgs e)
         {

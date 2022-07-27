@@ -59,6 +59,9 @@
             <TabItem Header="Статистика">
                 <view:CountiesStatisticView DataContext="{Binding CountriesStatistic}"/>
             </TabItem>
+            <TabItem Header="Отладка">
+                <TextBlock Text="{x:Static sys:Environment.CurrentDirectory}"/>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
