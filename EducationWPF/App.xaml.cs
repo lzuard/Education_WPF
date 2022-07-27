@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using EducationWPF.Services;
+using EducationWPF.Services.Interfaces;
 using EducationWPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,7 +48,7 @@ namespace EducationWPF
 
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
+            services.AddSingleton<IDataService, DataService>();
 
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<CountriesStatisticViewModel>();

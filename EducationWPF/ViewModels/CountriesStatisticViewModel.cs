@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using EducationWPF.Infrastructure.Commands;
 using EducationWPF.Models;
 using EducationWPF.Services;
+using EducationWPF.Services.Interfaces;
 using EducationWPF.ViewModels.Base;
 
 namespace EducationWPF.ViewModels
 {
     internal class CountriesStatisticViewModel : ViewModel
     {
-        private readonly DataService _DataService;
+        private readonly IDataService _DataService;
 
         public MainWindowViewModel MainModel { get; internal set; }
 
@@ -82,7 +77,7 @@ namespace EducationWPF.ViewModels
         //    }).ToArray();
         //}
 
-        public CountriesStatisticViewModel (DataService dataService)
+        public CountriesStatisticViewModel (IDataService dataService)
         {
             _DataService = dataService;
 
