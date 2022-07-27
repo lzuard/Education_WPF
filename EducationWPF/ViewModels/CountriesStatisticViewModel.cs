@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using EducationWPF.Infrastructure.Commands;
 using EducationWPF.Models;
 using EducationWPF.Services;
+using EducationWPF.Services.Interfaces;
 using EducationWPF.ViewModels.Base;
 
 namespace EducationWPF.ViewModels
 {
     internal class CountriesStatisticViewModel : ViewModel
     {
-        private readonly DataService _DataService;
+        private readonly IDataService _DataService;
 
-        private MainWindowViewModel MainModel { get; }
+        public MainWindowViewModel MainModel { get; internal set; }
 
 
         #region Countries : IEnymeravle<CountryInfo> 
@@ -61,31 +56,30 @@ namespace EducationWPF.ViewModels
         /// <summary>
         /// Debug constructor for design
         /// </summary>
-        public CountriesStatisticViewModel() : this(null)
-        {
-            if (!App.IsDesignMode)
-                throw new InRowChangingEventException("lox");
+        //public CountriesStatisticViewModel() : this(null)
+        //{
+        //    if (!App.IsDesignMode)
+        //        throw new InRowChangingEventException("lox");
 
-            _Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
-            {
-                Name = $"Country {1}",
-                Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
-                {
-                    Name = $"Province {i}",
-                    Location = new Point(i, j),
-                    Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount
-                    {
-                        Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
-                        Count = k
-                    }).ToArray()
-                }).ToArray()
-            }).ToArray();
-        }
+        //    _Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
+        //    {
+        //        Name = $"Country {1}",
+        //        Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
+        //        {
+        //            Name = $"Province {i}",
+        //            Location = new Point(i, j),
+        //            Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount
+        //            {
+        //                Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
+        //                Count = k
+        //            }).ToArray()
+        //        }).ToArray()
+        //    }).ToArray();
+        //}
 
-        public CountriesStatisticViewModel (MainWindowViewModel MainModel)
+        public CountriesStatisticViewModel (IDataService dataService)
         {
-            this.MainModel = MainModel;
-            _DataService=new DataService();
+            _DataService = dataService;
 
             #region Commands
 

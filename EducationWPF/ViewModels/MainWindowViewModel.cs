@@ -156,23 +156,24 @@ namespace EducationWPF.ViewModels
 
         /*----------------------------------------------------------------------------------*/
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel statistic)
         {
-            CountriesStatistic = new CountriesStatisticViewModel(this);
+            CountriesStatistic = statistic;
+            statistic.MainModel = this;
 
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
             #endregion
 
-            var data_points=new List<DataPoint>((int)(360/0.1));
-            for (var x=0d; x <= 360; x += 0.1)
-            {
-                const double to_rad = Math.PI / 180;
-                var y=Math.Sin(x*to_rad);
-                data_points.Add(new DataPoint { XValue= x, YValue = y });
-            }
-            TestDataPoints = data_points;
+            ////var data_points=new List<DataPoint>((int)(360/0.1));
+            ////for (var x=0d; x <= 360; x += 0.1)
+            ////{
+            ////    const double to_rad = Math.PI / 180;
+            ////    var y=Math.Sin(x*to_rad);
+            ////    data_points.Add(new DataPoint { XValue= x, YValue = y });
+            ////}
+            ////TestDataPoints = data_points;
         }
 
 

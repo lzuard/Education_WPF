@@ -9,13 +9,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using EducationWPF.Models;
+using EducationWPF.Services.Interfaces;
 
 namespace EducationWPF.Services
 {
-    internal class DataService
+    internal class DataService : IDataService
     {
         private const string _DataSourceAddress = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
+        public DataService(){} //Debug
 
         private static async Task<Stream> GetDataStream()
         {
