@@ -14,7 +14,7 @@
         xmlns:view="clr-namespace:EducationWPF.Views"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="800"
-        DataContext="{vm:MainWindowViewModel}">
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>

@@ -156,9 +156,10 @@ namespace EducationWPF.ViewModels
 
         /*----------------------------------------------------------------------------------*/
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel statistic)
         {
-            CountriesStatistic = new CountriesStatisticViewModel(this);
+            CountriesStatistic = statistic;
+            statistic.MainModel = this;
 
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);

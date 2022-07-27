@@ -17,7 +17,7 @@ namespace EducationWPF.ViewModels
     {
         private readonly DataService _DataService;
 
-        private MainWindowViewModel MainModel { get; }
+        public MainWindowViewModel MainModel { get; internal set; }
 
 
         #region Countries : IEnymeravle<CountryInfo> 
@@ -61,31 +61,30 @@ namespace EducationWPF.ViewModels
         /// <summary>
         /// Debug constructor for design
         /// </summary>
-        public CountriesStatisticViewModel() : this(null)
-        {
-            if (!App.IsDesignMode)
-                throw new InRowChangingEventException("lox");
+        //public CountriesStatisticViewModel() : this(null)
+        //{
+        //    if (!App.IsDesignMode)
+        //        throw new InRowChangingEventException("lox");
 
-            _Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
-            {
-                Name = $"Country {1}",
-                Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
-                {
-                    Name = $"Province {i}",
-                    Location = new Point(i, j),
-                    Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount
-                    {
-                        Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
-                        Count = k
-                    }).ToArray()
-                }).ToArray()
-            }).ToArray();
-        }
+        //    _Countries = Enumerable.Range(1, 10).Select(i => new CountryInfo
+        //    {
+        //        Name = $"Country {1}",
+        //        Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
+        //        {
+        //            Name = $"Province {i}",
+        //            Location = new Point(i, j),
+        //            Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount
+        //            {
+        //                Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
+        //                Count = k
+        //            }).ToArray()
+        //        }).ToArray()
+        //    }).ToArray();
+        //}
 
-        public CountriesStatisticViewModel (MainWindowViewModel MainModel)
+        public CountriesStatisticViewModel (DataService dataService)
         {
-            this.MainModel = MainModel;
-            _DataService=new DataService();
+            _DataService = dataService;
 
             #region Commands
 
