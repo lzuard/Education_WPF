@@ -46,12 +46,10 @@ namespace EducationWPF
             _host = null;
         }
 
-        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddSingleton<IDataService, DataService>();
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => 
+            services
+            .RegisterServices()
+            .RegisterViewModels();
 
-            services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<CountriesStatisticViewModel>();
-        }
     }
 }
