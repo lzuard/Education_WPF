@@ -60,9 +60,8 @@ namespace EducationWPF.Components
         #endregion
 
      
-        public GaugeIndicator()
-        {
-            InitializeComponent();
-        }
+        public GaugeIndicator() => InitializeComponent();
+
+
     }
 }

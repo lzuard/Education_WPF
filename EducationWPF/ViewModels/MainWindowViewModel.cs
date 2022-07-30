@@ -137,6 +137,19 @@ namespace EducationWPF.ViewModels
 
         #endregion
 
+        #region Coefficient : double - Coefficient for converter
+
+        /// <summary>Coefficient for converter</summary>
+        private double _Coefficient = 1;
+
+        public double Coefficient
+        {
+            get => _Coefficient;
+            set => Set(ref _Coefficient, value);
+        }
+
+        #endregion
+
 
         /*----------------------------------------------------------------------------------*/
 
