@@ -7,13 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
-        <!--<Path Stroke="Red" StrokeThickness="2" Data="M0,0 L5,7 L30,60 L20,0 H30 V40 Z" Fill="Aqua" Visibility="Collapsed"/>
-        <Polygon Stroke="Red" StrokeThickness="2" Fill="Aqua" Points="0,0 5,7 10,2" Visibility="Collapsed"/>
-        <Polyline Stroke="Red" StrokeThickness="2" Fill="Aqua" Points="5,7 28,12 20,37" Visibility="Collapsed"/>
-        <Line Stroke="Red " StrokeThickness="2" 
-              X1="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
-              Y1="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>-->
-        <!--<Border BorderThickness="2, 0, 0, 0" BorderBrush="Red" CornerRadius="5, 0, 0, 5"/>-->
         <Viewbox>
             <Grid Width="100" Height="100">
                 <Line StrokeThickness="2" Stroke="Red" 
@@ -23,7 +16,8 @@
                     <Line.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="-50"/>
-                            <RotateTransform Angle="100"/>
+                            <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource AncestorType=local:GaugeIndicator}}" 
+                                             x:Name="ArrowAngle"/>
                         </TransformGroup>
                         
                     </Line.RenderTransform>

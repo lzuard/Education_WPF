@@ -125,6 +125,18 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region FuelCount : double
+
+        private double _FuelCount = 0;
+
+        public double FuelCount
+        {
+            get => _FuelCount;
+            set => Set(ref _FuelCount, value);
+        }
+
+        #endregion
+
 
         /*----------------------------------------------------------------------------------*/
 

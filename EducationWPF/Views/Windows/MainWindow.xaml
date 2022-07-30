@@ -12,6 +12,7 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:view="clr-namespace:EducationWPF.Views"
+        xmlns:components="clr-namespace:EducationWPF.Components"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="800"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
@@ -60,7 +61,12 @@
                 <view:CountiesStatisticView DataContext="{Binding CountriesStatistic}"/>
             </TabItem>
             <TabItem Header="Отладка">
-                <TextBlock Text="{x:Static sys:Environment.CurrentDirectory}"/>
+                <Grid>
+                    <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" 
+                                               Value="{Binding FuelCount}"/>
+                    <Slider VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="30"
+                            Minimum="0" Maximum="100" Value="{Binding FuelCount}"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
