@@ -1,16 +1,16 @@
-﻿using EducationWPF.Infrastructure.Commands;
+using EducationWPF.Infrastructure.Commands;
 using EducationWPF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using EducationWPF.Models.Decanat;
-using OxyPlot;
+using EducationWPF.Services.Interfaces;
 using DataPoint = EducationWPF.Models.DataPoint;
 
 namespace EducationWPF.ViewModels
@@ -18,8 +18,11 @@ namespace EducationWPF.ViewModels
     [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel: ViewModel
     {
+
+        private readonly IAsyncDataService _asyncData;
         /*----------------------------------------------------------------------------------*/
         public CountriesStatisticViewModel CountriesStatistic { get; }
+
 
 
         /*----------------------------------------------------------------------------------*/
@@ -147,6 +150,19 @@ namespace EducationWPF.ViewModels
             get => _Coefficient;
             set => Set(ref _Coefficient, value);
         }
+        #endregion
+        
+        
+        #region DataValue : string - Long sync operation result
+
+        /// <summary>Long sync operation result</summary>
+        private string _DataValue;
+
+        public string DataValue
+        {
+            get => _DataValue;
+            private set => Set(ref _DataValue, value);
+        }
 
         #endregion
 
@@ -177,18 +193,56 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region Command StartProcess - Process Startup
+
+        public ICommand StartProcessCommand { get; }
+
+
+        private bool CanStartProcessCommandExecute(object p) => true;
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            new Thread(ComputeValue).Start();
+        }
+
+        private void ComputeValue()
+        {
+            DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+        #endregion
+
+        #region Command StopProcess - Process terminating
+
+        public ICommand StopProcessCommand { get; }
+
+
+        private bool CanStopProcessCommandExecute(object p) => true;
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        #endregion
+
         #endregion
 
         /*----------------------------------------------------------------------------------*/
 
-        public MainWindowViewModel(CountriesStatisticViewModel statistic)
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
         {
             CountriesStatistic = statistic;
             statistic.MainModel = this;
+            _asyncData=asyncData;
 
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
+
             #endregion
 
             ////var data_points=new List<DataPoint>((int)(360/0.1));
