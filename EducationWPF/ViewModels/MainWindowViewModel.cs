@@ -2,7 +2,6 @@
 using EducationWPF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -10,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using EducationWPF.Models.Decanat;
-using OxyPlot;
+using EducationWPF.Services.Interfaces;
 using DataPoint = EducationWPF.Models.DataPoint;
 
 namespace EducationWPF.ViewModels
@@ -18,8 +17,11 @@ namespace EducationWPF.ViewModels
     [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel: ViewModel
     {
+
+        private readonly IAsyncDataService _asyncData;
         /*----------------------------------------------------------------------------------*/
         public CountriesStatisticViewModel CountriesStatistic { get; }
+
 
 
         /*----------------------------------------------------------------------------------*/
@@ -156,7 +158,7 @@ namespace EducationWPF.ViewModels
 
         /*----------------------------------------------------------------------------------*/
 
-        public MainWindowViewModel(CountriesStatisticViewModel statistic)
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
         {
             CountriesStatistic = statistic;
             statistic.MainModel = this;

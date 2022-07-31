@@ -13,6 +13,7 @@ namespace EducationWPF.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IDataService, DataService>();
+            services.AddTransient<IAsyncDataService, AsyncDataService>();
 
             return services;
         }
