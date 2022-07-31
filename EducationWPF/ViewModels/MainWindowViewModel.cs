@@ -1,4 +1,4 @@
-﻿using EducationWPF.Infrastructure.Commands;
+using EducationWPF.Infrastructure.Commands;
 using EducationWPF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -128,6 +128,31 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region FuelCount : double
+
+        private double _FuelCount = 0;
+
+        public double FuelCount
+        {
+            get => _FuelCount;
+            set => Set(ref _FuelCount, value);
+        }
+
+        #endregion
+
+        #region Coefficient : double - Coefficient for converter
+
+        /// <summary>Coefficient for converter</summary>
+        private double _Coefficient = 1;
+
+        public double Coefficient
+        {
+            get => _Coefficient;
+            set => Set(ref _Coefficient, value);
+        }
+        #endregion
+        
+        
         #region DataValue : string - Long sync operation result
 
         /// <summary>Long sync operation result</summary>

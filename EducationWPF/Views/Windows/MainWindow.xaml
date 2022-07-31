@@ -12,6 +12,8 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:view="clr-namespace:EducationWPF.Views"
+        xmlns:components="clr-namespace:EducationWPF.Components"
+        xmlns:converters="clr-namespace:EducationWPF.Infrastructure.Converters"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="800"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
@@ -71,6 +73,40 @@
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                                Text="{Binding DataValue}" FontSize="30"></TextBlock>
                 </DockPanel>
+            </TabItem>
+            <TabItem Header="Arrow">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <converters:ParametricMultiplyValueConverter x:Key="Multiply"
+                            Value="{Binding Coefficient}"/>
+                    </Grid.Resources>
+                    <components:GaugeIndicator Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                                               Value="{Binding FuelCount}"/>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <TextBlock Text="Значение"/>
+                            <Slider Margin="27.5,0,0,0"  Width="400"
+                                    Minimum="0" Maximum="100">
+                                <Slider.Value>
+                                    <Binding Path="FuelCount" Converter="{StaticResource Multiply}"/>
+                                </Slider.Value>
+                            </Slider>
+                            <TextBlock Text="{Binding FuelCount}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <TextBlock Text="Коэффициент"/>
+                            <Slider Margin="5,0,0,0" Width="400"
+                                    Minimum="-10" Maximum="10" SmallChange="0.1"
+                                    Value="{Binding Coefficient}"/>
+                            <TextBlock Text="{Binding Coefficient}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
