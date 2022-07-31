@@ -64,7 +64,7 @@
                     <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
                         <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">
                             <Button Margin="5" Padding="20,5" Content="Запуск" Command="{Binding StartProcessCommand}"/>
-                            <Button Margin="5" Padding="20,5" Content="Запуск" Command="{Binding StopProcessCommand}"/>
+                            <Button Margin="5" Padding="20,5" Content="Стоп" Command="{Binding StopProcessCommand}"/>
                         </UniformGrid>
                         <ProgressBar DockPanel.Dock="Top" Margin="10"/>
                     </DockPanel>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -175,6 +176,11 @@ namespace EducationWPF.ViewModels
         private bool CanStartProcessCommandExecute(object p) => true;
 
         private void OnStartProcessCommandExecuted(object p)
+        {
+            new Thread(ComputeValue).Start();
+        }
+
+        private void ComputeValue()
         {
             DataValue = _asyncData.GetResult(DateTime.Now);
         }
