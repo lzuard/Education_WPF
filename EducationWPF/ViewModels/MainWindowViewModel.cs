@@ -127,6 +127,19 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region DataValue : string - Long sync operation result
+
+        /// <summary>Long sync operation result</summary>
+        private string _DataValue;
+
+        public string DataValue
+        {
+            get => _DataValue;
+            private set => Set(ref _DataValue, value);
+        }
+
+        #endregion
+
 
         /*----------------------------------------------------------------------------------*/
 
@@ -154,6 +167,34 @@ namespace EducationWPF.ViewModels
         }
         #endregion
 
+        #region Command StartProcess - Process Startup
+
+        public ICommand StartProcessCommand { get; }
+
+
+        private bool CanStartProcessCommandExecute(object p) => true;
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+        #endregion
+
+        #region Command StopProcess - Process terminating
+
+        public ICommand StopProcessCommand { get; }
+
+
+        private bool CanStopProcessCommandExecute(object p) => true;
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        #endregion
+
         #endregion
 
         /*----------------------------------------------------------------------------------*/
@@ -162,10 +203,15 @@ namespace EducationWPF.ViewModels
         {
             CountriesStatistic = statistic;
             statistic.MainModel = this;
+            _asyncData=asyncData;
 
             #region Commands
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecute);
+
             #endregion
 
             ////var data_points=new List<DataPoint>((int)(360/0.1));

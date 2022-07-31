@@ -8,5 +8,6 @@ namespace EducationWPF.Services.Interfaces
 {
     internal interface IAsyncDataService
     {
+        string GetResult(DateTime time);
     }
 }
