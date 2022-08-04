@@ -5,15 +5,17 @@ namespace EWPF_Console
 {
     internal class Program
     {
+        private static bool __ThreadUpdate = true;
+
         public static void Main(string[] args)
         {
             Thread.CurrentThread.Name = "Main thread";
-            //var thread = new Thread(ThreadMethod);
-            //thread.Name = "Second thread";
-            //thread.IsBackground = true;
-            //thread.Priority=ThreadPriority.BelowNormal;
+            var clock_thread = new Thread(ThreadMethod);
+            clock_thread.Name = "Second thread";
+            clock_thread.IsBackground = true;
+            clock_thread.Priority = ThreadPriority.BelowNormal;
 
-            //thread.Start(42);  //first and bad method to start a thread
+            clock_thread.Start(42);  //first and bad method to start a thread
 
 
             //var count = 5;
@@ -46,7 +48,7 @@ namespace EWPF_Console
                 });
             }
 
-            //----------Can be used instead of lock()--------
+            ////----------Can be used instead of lock()--------
             //Monitor.Enter(lockObject);
             //try
             //{
@@ -56,11 +58,19 @@ namespace EWPF_Console
             //{
             //    Monitor.Exit(lockObject);
             //}
-            //------------------------------------------------
+            ////------------------------------------------------
 
 
             foreach(var thread in threads)
                 thread.Start();
+
+            ////-----------Ways to stop threads (dangerous)-------------
+            //if (!clock_thread.Join(100))
+            //{
+            //    //clock_thread.Abort(); //- Depricated: abort thread while every operation
+            //    clock_thread.Interrupt();
+            //}
+            ////--------------------------------------------------------
 
             Console.ReadLine();
             Console.WriteLine(string.Join(",",values));
@@ -92,8 +102,17 @@ namespace EWPF_Console
             Console.WriteLine(value);
 
             CheckThread();
+
+            while (__ThreadUpdate)
+            {
+                Thread.Sleep(100);
+                Console.Title = DateTime.Now.ToString();
+            }
         }
 
+        /// <summary>
+        /// Prints thread id into console
+        /// </summary>
         private static void CheckThread()
         {
             var thread = Thread.CurrentThread;
