@@ -1,28 +1,69 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Threading;
 namespace EWPF_Console 
 {
     internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Thread.CurrentThread.Name = "Main thread";
-            var thread = new Thread(ThreadMethod);
-            thread.Name = "Second thread";
-            thread.IsBackground = true;
-            thread.Priority=ThreadPriority.BelowNormal;
+            //var thread = new Thread(ThreadMethod);
+            //thread.Name = "Second thread";
+            //thread.IsBackground = true;
+            //thread.Priority=ThreadPriority.BelowNormal;
 
-            thread.Start(42);  //first and bad method to start a thread
+            //thread.Start(42);  //first and bad method to start a thread
 
 
-            var count = 5;
-            var msg = "Hello World!";
-            var timeout = 150;
+            //var count = 5;
+            //var msg = "Hello World!";
+            //var timeout = 150;
 
-            //second and good method to start a thread
-            new Thread(()=>PrintMethod(msg, count, timeout)) {IsBackground = true}.Start();
+            ////second and good method to start a thread
+            //new Thread(()=>PrintMethod(msg, count, timeout)) {IsBackground = true}.Start();
 
-            CheckThread();
+            //CheckThread();
+
+
+            var values = new List<int>();
+
+            var threads = new Thread[10];
+
+            object lockObject=new object();
+
+            for (var i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(() =>
+                {
+                    for (var j = 0; j < 10; j++)
+                    {
+                        lock (lockObject) 
+                            values.Add(Thread.CurrentThread.ManagedThreadId);
+                        Thread.Sleep(1);
+                    }
+
+                });
+            }
+
+            //----------Can be used instead of lock()--------
+            //Monitor.Enter(lockObject);
+            //try
+            //{
+            //
+            //}
+            //finally
+            //{
+            //    Monitor.Exit(lockObject);
+            //}
+            //------------------------------------------------
+
+
+            foreach(var thread in threads)
+                thread.Start();
+
+            Console.ReadLine();
+            Console.WriteLine(string.Join(",",values));
             Console.ReadLine();
         }
 
