@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using EducationWPF.Infrastructure.Commands;
+using EducationWPF.Services.Interfaces;
 using EducationWPF.ViewModels.Base;
 
 namespace EducationWPF.ViewModels
 {
     internal class WebServerViewModel :ViewModel
     {
+        private readonly IWebServerService _server;
+
         #region Enabled
 
         private bool _enabled = false;
@@ -52,5 +55,10 @@ namespace EducationWPF.ViewModels
         }
 
         #endregion
+
+        public WebServerViewModel(IWebServerService server)
+        {
+            _server = server;
+        }
     }
 }
