@@ -15,13 +15,14 @@ namespace EducationWPF.ViewModels
         private readonly IWebServerService _server;
 
         #region Enabled
-
-        private bool _enabled = false;
-
         public bool Enabled
         {
-            get => _enabled;
-            set => Set(ref _enabled, value);
+            get => _server.Enabled;
+            set
+            {
+                _server.Enabled = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
@@ -36,7 +37,8 @@ namespace EducationWPF.ViewModels
 
         private void OnStartCommandExecuted(object p)
         {
-            Enabled = true;
+            _server.Start();
+            OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
@@ -51,14 +53,19 @@ namespace EducationWPF.ViewModels
 
         private void OnStopCommandExecuted(object p)
         {
-            Enabled = false;
+            _server.Stop();
+            OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
+
+
+        #region ctor
 
         public WebServerViewModel(IWebServerService server)
         {
             _server = server;
         }
+        #endregion
     }
 }
