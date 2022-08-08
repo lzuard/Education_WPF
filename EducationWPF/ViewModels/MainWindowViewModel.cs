@@ -23,6 +23,7 @@ namespace EducationWPF.ViewModels
         /*----------------------------------------------------------------------------------*/
         public CountriesStatisticViewModel CountriesStatistic { get; }
 
+        public WebServerViewModel WebServer { get; }
 
 
         /*----------------------------------------------------------------------------------*/
@@ -205,9 +206,10 @@ namespace EducationWPF.ViewModels
 
         /*----------------------------------------------------------------------------------*/
 
-        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData)
+        public MainWindowViewModel(CountriesStatisticViewModel statistic, IAsyncDataService asyncData, WebServerViewModel webServer)
         {
             CountriesStatistic = statistic;
+            WebServer = webServer;
             statistic.MainModel = this;
             _asyncData=asyncData;
 
