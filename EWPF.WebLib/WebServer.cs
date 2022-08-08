@@ -49,7 +49,7 @@ namespace EWPF.WebLib
 
         #region Events
 
-        private event EventHandler<RequestReceiverEventArgs> RequestReceived;
+        public event EventHandler<RequestReceiverEventArgs> RequestReceived;
 
         #endregion
 
@@ -66,8 +66,8 @@ namespace EWPF.WebLib
                 if (_enabled) return;
 
                 _listener = new HttpListener();
-                _listener.Prefixes.Add($"http//*:{_port}"); //exception if url or port is restricted for user
-                _listener.Prefixes.Add($"http//+:{_port}"); //both
+                _listener.Prefixes.Add($"http://*:{_port}/"); //exception if url or port is restricted for user
+                _listener.Prefixes.Add($"http://+:{_port}/"); //both
                 _enabled = true;
             }
             ListenAsync();

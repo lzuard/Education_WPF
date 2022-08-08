@@ -9,6 +9,8 @@ namespace EWPF_Console
 
         public static void Main(string[] args)
         {
+            WebServerTest.Run();
+            return;
             Thread.CurrentThread.Name = "Main thread";
             var clock_thread = new Thread(ThreadMethod);
             clock_thread.Name = "Second thread";
