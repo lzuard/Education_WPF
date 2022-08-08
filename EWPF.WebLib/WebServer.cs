@@ -3,6 +3,10 @@ using System.Net.Sockets;
 
 namespace EWPF.WebLib
 {
+
+    /// <summary>
+    /// Main web server class
+    /// </summary>
     public class WebServer
     {
         #region Fields
@@ -12,10 +16,10 @@ namespace EWPF.WebLib
         //private TcpListener _listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080));
 
         //for little crying babies (+ problems with Windows restrictions) 
-        private HttpListener _listener;
-        private readonly int _port;
-        private bool _enabled;
-        private readonly object _syncRoot = new object(); //for critical section
+        private HttpListener _listener;                     //HTTP listener
+        private readonly int _port;                         //Server port
+        private bool _enabled;                              //If server has been started
+        private readonly object _syncRoot = new object();   //for critical section
 
         #endregion
 
@@ -43,6 +47,12 @@ namespace EWPF.WebLib
 
         #endregion
 
+        #region Events
+
+        private event EventHandler<RequestReceiverEventArgs> RequestReceived;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -60,7 +70,7 @@ namespace EWPF.WebLib
                 _listener.Prefixes.Add($"http//+:{_port}"); //both
                 _enabled = true;
             }
-            Listen();
+            ListenAsync();
         }
         
         /// <summary>
@@ -79,13 +89,47 @@ namespace EWPF.WebLib
         }
 
         /// <summary>
-        /// 
+        /// Incoming connections listening
         /// </summary>
-        private void Listen()
+        private async void ListenAsync()
         {
+            var listener = _listener;
 
+            listener.Start();
+
+            while (_enabled)
+            {
+                var context = await listener.GetContextAsync().ConfigureAwait(false);
+                ProcessRequest(context);
+                
+
+            }
+
+            listener.Stop();
         }
+
+
+        /// <summary>
+        /// Do things with context from http listener
+        /// </summary>
+        /// <param name="context"></param>
+        private void ProcessRequest(HttpListenerContext context)
+        {
+            RequestReceived?.Invoke(this, new RequestReceiverEventArgs(context));
+        }
+
         #endregion
+
+    }
+
+    public class RequestReceiverEventArgs : EventArgs
+    {
+        public HttpListenerContext Context { get; }
+
+        public RequestReceiverEventArgs(HttpListenerContext context)
+        {
+            Context = context;
+        }
 
     }
 }
