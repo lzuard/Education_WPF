@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EWPF.WebLib\EWPF.WebLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="AppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
