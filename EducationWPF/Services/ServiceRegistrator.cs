@@ -14,6 +14,7 @@ namespace EducationWPF.Services
         {
             services.AddSingleton<IDataService, DataService>();
             services.AddTransient<IAsyncDataService, AsyncDataService>();
+            services.AddTransient<IWebServerService ,WebServerService>();
 
             return services;
         }

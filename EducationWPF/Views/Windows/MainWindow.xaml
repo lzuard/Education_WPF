@@ -4,13 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
-        xmlns:decanat="clr-namespace:EducationWPF.Models.Decanat"
-        xmlns:vm="clr-namespace:EducationWPF.ViewModels"
         xmlns:cmd="clr-namespace:EducationWPF.Infrastructure.Commands"
-        xmlns:local="clr-namespace:EducationWPF"
-        xmlns:oxy="http://oxyplot.org/wpf"
-        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-        xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:view="clr-namespace:EducationWPF.Views"
         xmlns:components="clr-namespace:EducationWPF.Components"
         xmlns:converters="clr-namespace:EducationWPF.Infrastructure.Converters"
@@ -33,20 +27,17 @@
                     </MenuItem.Command>
                 </MenuItem>-->
             </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="Веб-сервер" DataContext="{Binding WebServer}">
+                    <MenuItem Header="Включён" IsCheckable="True" IsChecked="{Binding Enabled}" />
+                    <Separator/>
+                    <MenuItem Header="Включить" Command="{Binding StartCommand}"/>
+                    <MenuItem Header="Выключить" Command="{Binding StopCommand}"/>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Помощи"></MenuItem>
             </MenuItem>
-            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
-                <MenuItem.Header>
-                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"/>
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem Command="{Binding ChangeTabIndexCommand}" CommandParameter="+1">
-                <MenuItem.Header>
-                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"/>
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem Header="{Binding SelectedPageIndex}" IsEnabled="False"></MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>

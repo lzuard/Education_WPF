@@ -1,73 +1,124 @@
-﻿
-using System;
-using System.Globalization;
-
-namespace EWPF_Console // Note: actual namespace depends on the project name.
+﻿using System;
+using System.Collections.Concurrent;
+using System.Threading;
+namespace EWPF_Console 
 {
     internal class Program
     {
-        private const string data_url = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+        private static bool __ThreadUpdate = true;
 
-
-        private static async Task<Stream> GetDataStream()
+        public static void Main(string[] args)
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(data_url, HttpCompletionOption.ResponseHeadersRead);
-            return await response.Content.ReadAsStreamAsync();
+            WebServerTest.Run();
+            return;
+            Thread.CurrentThread.Name = "Main thread";
+            var clock_thread = new Thread(ThreadMethod);
+            clock_thread.Name = "Second thread";
+            clock_thread.IsBackground = true;
+            clock_thread.Priority = ThreadPriority.BelowNormal;
+
+            clock_thread.Start(42);  //first and bad method to start a thread
+
+
+            //var count = 5;
+            //var msg = "Hello World!";
+            //var timeout = 150;
+
+            ////second and good method to start a thread
+            //new Thread(()=>PrintMethod(msg, count, timeout)) {IsBackground = true}.Start();
+
+            //CheckThread();
+
+
+            var values = new List<int>();
+
+            var threads = new Thread[10];
+
+            object lockObject=new object();
+
+            for (var i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(() =>
+                {
+                    for (var j = 0; j < 10; j++)
+                    {
+                        lock (lockObject) 
+                            values.Add(Thread.CurrentThread.ManagedThreadId);
+                        Thread.Sleep(1);
+                    }
+
+                });
+            }
+
+            ////----------Can be used instead of lock()--------
+            //Monitor.Enter(lockObject);
+            //try
+            //{
+            //
+            //}
+            //finally
+            //{
+            //    Monitor.Exit(lockObject);
+            //}
+            ////------------------------------------------------
+
+
+            foreach(var thread in threads)
+                thread.Start();
+
+            ////-----------Ways to stop threads (dangerous)-------------
+            //if (!clock_thread.Join(100))
+            //{
+            //    //clock_thread.Abort(); //- Depricated: abort thread while every operation
+            //    clock_thread.Interrupt();
+            //}
+            ////--------------------------------------------------------
+
+            Console.ReadLine();
+            Console.WriteLine(string.Join(",",values));
+            Console.ReadLine();
         }
 
-        private static IEnumerable<string> GetDataLines()
+        /// <summary>
+        /// Thread method that can't be started with Thread.Start()
+        /// </summary>
+        /// <param name="Message"></param>
+        /// <param name="Count"></param>
+        /// <param name="Timeout"></param>
+        private static void PrintMethod(string Message, int Count, int Timeout)
         {
-            using var data_stream = GetDataStream().Result;
-            using var data_reader = new StreamReader(data_stream);
-
-            while (!data_reader.EndOfStream)
+            for (var i = 0; i < Count; i++)
             {
-                var line = data_reader.ReadLine();
-                if (string.IsNullOrWhiteSpace(line)) continue;
-                yield return line.Replace("Korea,", "Korea -").Replace("Bonaire,", "Bonaire -");
+                Console.WriteLine(Message);
+                Thread.Sleep(Timeout);
             }
         }
 
-        private static DateTime[] GetDates() => GetDataLines()
-            .First()
-            .Split(',')
-            .Skip(4)
-            .Select(s => DateTime.Parse(s, CultureInfo.InvariantCulture))
-            .ToArray();
-
-        private static IEnumerable<(string Country, string Province, int[] Counts)> GetData()
+        /// <summary>
+        /// Thread method that can be started with Thread.Start();
+        /// </summary>
+        /// <param name="parameter"></param>
+        private static void ThreadMethod(object parameter)
         {
-            var lines = GetDataLines()
-                .Skip(1)
-                .Select(line => line.Split(','));
+            var value = (int)parameter;
+            Console.WriteLine(value);
 
-            foreach (var row in lines)
+            CheckThread();
+
+            while (__ThreadUpdate)
             {
-                var province=row[0].Trim() ?? String.Empty;
-                var country_name = row[1].Trim(' ', '"') ?? String.Empty;
-                var counts = row.Skip(4).Select(int.Parse).ToArray();
-                yield return (country_name, province, counts);
+                Thread.Sleep(100);
+                Console.Title = DateTime.Now.ToString();
             }
-
         }
 
-        static void Main(string[] args)
+        /// <summary>
+        /// Prints thread id into console
+        /// </summary>
+        private static void CheckThread()
         {
-            //foreach (var data_line in GetDataLines())
-            //    Console.WriteLine(data_line);
-
-            //var dates = GetDates();
-            
-            //Console.WriteLine(String.Join("\r\n", dates));
-
-            //var russia_data = GetData()
-            //    .First(v=>v.Country.Equals("Russia",StringComparison.OrdinalIgnoreCase));
-            //Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts, (date, count) => $"{date:dd:MM} - {count}")));
-            //Console.ReadLine();
-
-            double x = Double.Parse("31.22", CultureInfo.InvariantCulture);
-            Console.WriteLine(x);
+            var thread = Thread.CurrentThread;
+            Console.WriteLine("Thread: "+thread.ManagedThreadId+" : "+thread.Name);
         }
     }
 }
