@@ -15,20 +15,22 @@ namespace EducationWPF.ViewModels.Base
 
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName=null)
         {
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-            var handlers = PropertyChanged;
-            if (handlers != null) return;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 
-            var invocationList = handlers.GetInvocationList();
+            ////async call not ready yet
+            //var handlers = PropertyChanged;
+            //if (handlers != null) return;
 
-            var arg = new PropertyChangedEventArgs(PropertyName);
-            foreach (var action in invocationList)
-            {
-                if (action.Target is DispatcherObject dispObj)
-                    dispObj.Dispatcher.Invoke(action, this, arg);
-                else
-                    action.DynamicInvoke(this, arg);
-            }
+            //var invocationList = handlers.GetInvocationList();
+
+            //var arg = new PropertyChangedEventArgs(PropertyName);
+            //foreach (var action in invocationList)
+            //{
+            //    if (action.Target is DispatcherObject dispObj)
+            //        dispObj.Dispatcher.Invoke(action, this, arg);
+            //    else
+            //        action.DynamicInvoke(this, arg);
+            //}
         }
 
 
