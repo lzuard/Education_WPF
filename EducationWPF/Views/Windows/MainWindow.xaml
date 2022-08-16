@@ -8,9 +8,16 @@
         xmlns:view="clr-namespace:EducationWPF.Views"
         xmlns:components="clr-namespace:EducationWPF.Components"
         xmlns:converters="clr-namespace:EducationWPF.Infrastructure.Converters"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="{Binding Path=Title}" Height="450" Width="800"
+        Title="{Binding Path=Title}" 
+        Height="450" Width="800"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CountriesStatistic.RefreshDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
